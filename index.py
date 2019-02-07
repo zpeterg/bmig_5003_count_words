@@ -25,8 +25,8 @@ def dealArgs(args):
 
 def getAndFilter(args):
     options = dealArgs(args)
-    words = getFile(options['file'])
-    arr = WalkArray(words, options)
+    these_words = getFile(options['file'])
+    arr = WalkArray(these_words, options)
     arr.filter()
     return arr.words
 

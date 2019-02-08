@@ -1,19 +1,19 @@
 import unittest
-import walkArray
+from filter import Filter
 
-options = {'start': 'foo', 'stop': 'bar', 'finish': 'enough'}
+options = {'start': 'foo', 'stop': 'Bar', 'finish': 'enough'}
 words = [
     'fish',
     'hat',
-    'foo',
+    'Foo',
     'cow',
-    'siamese',
-    'wonderland',
-    'foo',
+    'SIAMESE',
+    'wonderland##',
+    'FOO',
     'toothpaste',
     'bar',
     'umbrella',
-    'foo',
+    'foo##',
     'milky',
     'flight-manual',
     'toothpick',
@@ -25,22 +25,37 @@ words = [
 
 class WalkArrayTest(unittest.TestCase):
     def test_constructor(self):
-        w = walkArray.WalkArray(words, options)
-        self.assertEqual(w.words, words)
+        w = Filter(options)
+        self.assertEqual(w.start, options['start'].lower())
+        self.assertEqual(w.stop, options['stop'].lower())
+        self.assertEqual(w.finish, options['finish'].lower())
 
     def test_filter_simple(self):
         res = [
+            '',
+            '',
+            '',
             'cow',
             'siamese',
             'wonderland',
+            'foo',
             'toothpaste',
+            '',
+            '',
+            '',
             'milky',
             'flight-manual',
             'toothpick',
+            '',
+            None,
+            '',
+            '',
         ]
-        w = walkArray.WalkArray(words, options)
-        w.filter()
-        self.assertEqual(w.words, res)
+        generated = []
+        filter = Filter(options)
+        for word in words:
+            generated.append(filter.filter(word))
+        self.assertEqual(generated, res)
 
     def test_filter_sudden_stop(self):
         words = [
@@ -53,12 +68,19 @@ class WalkArrayTest(unittest.TestCase):
             'apollo',
         ]
         res = [
+            '',
+            '',
             'fish',
             'flamingo',
+            None,
+            '',
+            '',
         ]
-        w = walkArray.WalkArray(words, options)
-        w.filter()
-        self.assertEqual(w.words, res)
+        filtered = []
+        w = Filter(options)
+        for word in words:
+            filtered.append(w.filter(word))
+        self.assertEqual(filtered, res)
 
     def test_filter_run_out(self):
         words = [
@@ -70,14 +92,18 @@ class WalkArrayTest(unittest.TestCase):
             'apollo',
         ]
         res = [
+            '',
+            '',
             'fish',
             'flamingo',
             'trampoline',
             'apollo',
         ]
-        w = walkArray.WalkArray(words, options)
-        w.filter()
-        self.assertEqual(w.words, res)
+        w = Filter(options)
+        filtered = []
+        for word in words:
+            filtered.append(w.filter(word))
+        self.assertEqual(filtered, res)
 
 if __name__ == '__main__':
     unittest.main()

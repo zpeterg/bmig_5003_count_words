@@ -8,10 +8,11 @@ A command-line script by Peter Granderson that loads a file and splits/filters i
 1. ```cd bmig5003_split_to_words```
 2. ```python
     python index.py \
-        -file=<filename> \
-        -start=<start word> \
-        -stop=<stop word> \
-        -finish=<finish word> \
+        --input=<filename> \
+        --start=<start word> \
+        --stop=<stop word> \
+        --finish=<finish word> \
+        <optional: "--output=<filename>" for outputting to file> \
         <optional: "-f" for formating into columns>
      ```
 

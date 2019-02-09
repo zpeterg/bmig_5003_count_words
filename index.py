@@ -4,7 +4,7 @@ from getFile import getFile
 from filter import Filter
 from format import formatToLines
 from utils import dealArgs
-from writeFile import writeFile
+from writeFile import writeFile, writeCSV
 from getStats import getStats
 
 
@@ -16,7 +16,8 @@ def getAndFilter(options):
 
 if __name__ == '__main__':
     args = sys.argv
-    options = dealArgs(args)
+    # ################ todo: refactor dealArgs to a class... and add CSV output
+    options = dealArgs(args).to_object()
     words = getAndFilter(options)
     stats = None
 
@@ -31,11 +32,20 @@ if __name__ == '__main__':
 
     # if outputting, just print JSON for one
     if options['output']:
-        if stats:
-            forPrint = json.dumps(stats, indent=4)
+        # CSV
+        if options['csv']:
+            columns = ['Name']
+            if stats:
+                columns = ['Name', 'Count']
+            writeCSV(stats, options['output'], columns)
+
+        # Not CSV
         else:
-            forPrint = json.dumps(words, indent=4)
-        writeFile(forPrint, options['output'])
+            if stats:
+                forPrint = json.dumps(stats, indent=4)
+            else:
+                forPrint = json.dumps(words, indent=4)
+            writeFile(forPrint, options['output'])
         print(f"\nThe requested data has been written to file {options['output']}.")
     # if printing to screen
     else:

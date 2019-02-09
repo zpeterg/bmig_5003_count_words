@@ -7,6 +7,7 @@ words = [
     'hat',
     'foo',
     'cow',
+    'Cow',
     'siamese.',
     'Wonderland',
     'foo',
@@ -38,7 +39,7 @@ class GetFileTest(unittest.TestCase):
         self.assertRaises(FileNotFoundError, getFile, 'aaa.txt', lambda a: a)
 
     def test_getFile_(self):
-        res = ['Fishhi', 'hathi', 'foohi', 'cowhi', 'siamese.hi', 'Wonderlandhi', 'foohi', 'toothpastehi', 'barhi']
+        res = ['Fishhi', 'hathi', 'foohi', 'cowhi', 'Cowhi', 'siamese.hi', 'Wonderlandhi', 'foohi', 'toothpastehi', 'barhi']
         self.assertEqual(res, getFile('small_test.txt', on_word))
 
     def test_getFile_moby(self):

@@ -27,6 +27,7 @@ class GetAndFilterTest(unittest.TestCase):
         }
         res = [
             'cow',
+            'cow',
             'siamese',
             'wonderland',
             'foo',

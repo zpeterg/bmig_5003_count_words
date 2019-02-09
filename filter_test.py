@@ -23,7 +23,7 @@ words = [
     'bar'
 ]
 
-class WalkArrayTest(unittest.TestCase):
+class FilterTest(unittest.TestCase):
     def test_constructor(self):
         w = Filter(options)
         self.assertEqual(w.start, options['start'].lower())
@@ -104,6 +104,34 @@ class WalkArrayTest(unittest.TestCase):
         for word in words:
             filtered.append(w.filter(word))
         self.assertEqual(filtered, res)
+
+    def test_filter_finish_same_as_stop(self):
+        words = [
+            'cow',
+            'foo',
+            'fish',
+            'flamingo',
+            'trampoline',
+            'apollo',
+            'cow',
+            'pancakes',
+        ]
+        options = {'start': 'cow', 'stop': 'Flamingo', 'finish': 'flamingo'}
+        res = [
+            '',
+            'foo',
+            'fish',
+            None,
+            '',
+            '',
+            '',
+            'pancakes',
+        ]
+        w = Filter(options)
+        filtered = []
+        for word in words:
+            filtered.append(w.filter(word))
+        self.assertEqual(res, filtered)
 
 if __name__ == '__main__':
     unittest.main()

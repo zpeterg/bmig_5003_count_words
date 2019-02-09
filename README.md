@@ -12,8 +12,10 @@ A command-line script by Peter Granderson that loads a file and splits/filters i
         --start=<start word> \
         --stop=<stop word> \
         --finish=<finish word> \
-        <optional: "--output=<filename>" for outputting to file> \
-        <optional: "-f" for formating into columns>
+        <optional: "--output=<filename>" for outputting to file - is automatically appended with correct fileending> \
+        <optional: "-s" for outputting stats (count of words)>
+        <optional: "-f" for formating into columns - only for print-to-screen>
+        <optional: "-c" for outputting to csv - only for output to file>
      ```
 
 For example: ```python index.py -file=small_test.txt -start=foo -stop=bar -finish=enough -f```

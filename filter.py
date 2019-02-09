@@ -11,15 +11,15 @@ class Filter:
     def filter(self, word):
         word = cleanWord(word)
         # Only DON'T record the start word if not already recording
+        if word == self.finish:
+            self.recording = False
+            # None is the flag to stop the file-read
+            return None
         if word == self.start and not self.recording:
             self.recording = True
             return ''
         elif word == self.stop:
             self.recording = False
-        elif word == self.finish:
-            self.recording = False
-            # None is the flag to stop the file-read
-            return None
         if self.recording:
             return word
         # Blank-string does not get saved in file-read

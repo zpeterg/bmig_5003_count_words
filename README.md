@@ -18,7 +18,15 @@ A command-line script by Peter Granderson that loads a file and splits/filters i
         <optional: "-c" for outputting to csv - only for output to file>
      ```
 
-For example: ```python index.py -file=small_test.txt -start=foo -stop=bar -finish=enough -f```
+## Examples
+To get words in columns:
+```python index.py --input=small_test.txt --start=foo --stop=bar --finish=enough -f```
+
+To get words with frequency-counts output to JSON file:
+```python index.py --input=small_test.txt --start=foo --stop=bar --finish=enough --output=deleteme.json -s```
+
+To get words with frequency-counts output to CSV file:
+```python index.py --input=small_test.txt --start=foo --stop=bar --finish=enough --output=deleteme.csv -s -c```
 
 You may also add new files at the root and change the -file, -start, -stop, -finish above. 
 

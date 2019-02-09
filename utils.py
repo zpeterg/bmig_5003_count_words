@@ -50,9 +50,9 @@ class dealArgs:
     @property
     def output(self):
         # append correct ending if its not there already
-        if self.csv and self.__output[-4:] != '.csv':
+        if self.csv and self.__output and self.__output[-4:] != '.csv':
             return self.__output + '.csv'
-        if not self.csv and self.__output[-5:] != '.json':
+        if not self.csv and self.__output and self.__output[-5:] != '.json':
             return self.__output + '.json'
         return self.__output
 
